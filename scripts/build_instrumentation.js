@@ -26,7 +26,7 @@ function initEmscripten() {
 
 initEmscripten();
 
-execSync('emcmake cmake -B build_wasm -S . -DCMAKE_CXX_FLAGS="-s USE_PTHREADS=1"', { encoding: "utf8", stdio: "inherit", env });
+execSync("emcmake cmake -B build_wasm -S .", { encoding: "utf8", stdio: "inherit", env });
 execSync(`cmake --build build_wasm --parallel ${parallelJobs} --target wasm-instrumentation`, {
   encoding: "utf8",
   stdio: "inherit",
