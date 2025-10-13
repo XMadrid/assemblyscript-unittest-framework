@@ -53,3 +53,34 @@ jobs:
         run: |
           set -e
           ccache --show-stats
+
+  Windows_test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          cache: "npm"
+      - run: npm ci
+
+      - name: Install Google Test
+        run: |
+          vcpkg install gtest:x64-windows
+          echo "GTest_ROOT=C:/vcpkg/installed/x64-windows" >> $GITHUB_ENV
+
+      - name: install ninja
+        run: choco install ninja
+
+      - run: npm run build
+      
+      - run: npm run test
+
+      - working-directory: ./example
+        run: |
+          set -e
+          npm ci
+          npm run test
+          npm run test:cjs
