@@ -92,7 +92,7 @@ jobs:
         run: choco install ninja
 
       - run: npm run build
-      
+
       - run: npm run test
 
       - working-directory: ./example
