@@ -26,11 +26,11 @@ function initEmscripten() {
 
 initEmscripten();
 
-execSync("cmake -B build_wasm -S .", { encoding: "utf8", stdio: "inherit", env });
+execSync("emcmake cmake -B build_wasm -S .", { encoding: "utf8", stdio: "inherit", env });
 execSync(`cmake --build build_wasm --parallel ${parallelJobs} --target wasm-instrumentation`, {
   encoding: "utf8",
   stdio: "inherit",
   env,
 });
 
-// copyFileSync("instrumentation/wasm-instrumentation.d.ts", "build_wasm/bin/wasm-instrumentation.d.ts");
+copyFileSync("instrumentation/wasm-instrumentation.d.ts", "build_wasm/bin/wasm-instrumentation.d.ts");
