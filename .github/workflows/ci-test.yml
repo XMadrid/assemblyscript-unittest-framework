@@ -88,6 +88,9 @@ jobs:
           vcpkg install gtest:x64-windows
           echo "GTest_ROOT=C:/vcpkg/installed/x64-windows" >> $GITHUB_ENV
 
+      - name: install ninja
+        run: choco install ninja
+
       - run: npm run build
       - run: npm run test
 
