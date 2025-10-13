@@ -26,8 +26,8 @@ function initEmscripten() {
 
 initEmscripten();
 
-execSync("emcmake cmake -B build_wasm -S .", { encoding: "utf8", stdio: "inherit", env });
-execSync(`cmake --build build_wasm --parallel ${parallelJobs} --target wasm-instrumentation`, {
+execSync("emcmake cmake -B build_wasm -S . -G Ninja", { encoding: "utf8", stdio: "inherit", env });
+execSync(`ninja -C build_wasm wasm-instrumentation`, {
   encoding: "utf8",
   stdio: "inherit",
   env,
