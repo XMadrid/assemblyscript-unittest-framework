@@ -100,7 +100,7 @@ jobs:
         run: |
           cmake -B build -S .  -DCMAKE_PREFIX_PATH=C:/vcpkg/packages/gtest_x64-windows
           cmake --build build --parallel 2 --target wasm-instrumentation-test wasm-opt
-          build/bin/wasm-instrumentation-test
+          ./build/bin/wasm-instrumentation-test
 
       # - name: run test
       #   run: |

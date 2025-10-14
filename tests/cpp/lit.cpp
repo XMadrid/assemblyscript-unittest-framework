@@ -46,20 +46,20 @@ TEST(lit, coverageInstrumentation) {
   const char *include = "[\"main\",\"assembly/.*\"]";
   Json::Reader jsonReader;
   // step 3, instrument , run and check;
-  for (Json::String const &wast : wastFiles) {
-    const std::filesystem::path wasmFile = tmpDir / (wast + ".out.wasm");
-    const std::filesystem::path wasmFileMap = tmpDir / (wast + ".out.wasm.map");
-    const std::filesystem::path wasmTarget = tmpDir / (wast + ".instrumented.wasm");
-    const std::filesystem::path debugTarget = tmpDir / (wast + ".debug.json");
-    const std::filesystem::path expectTarget = tmpDir / (wast + ".expect.json");
+  for (std::filesystem::path const &wast : wastFiles) {
+    const std::filesystem::path wasmFile = tmpDir / (wast.string() + ".out.wasm");
+    const std::filesystem::path wasmFileMap = tmpDir / (wast.string() + ".out.wasm.map");
+    const std::filesystem::path wasmTarget = tmpDir / (wast.string() + ".instrumented.wasm");
+    const std::filesystem::path debugTarget = tmpDir / (wast.string() + ".debug.json");
+    const std::filesystem::path expectTarget = tmpDir / (wast.string() + ".expect.json");
     const char *traceFunName = "assembly/env/traceExpression";
     wasmInstrumentation::InstrumentationConfig config;
     std::cout << "running lit - " << fixtureFolder << "/" << wast << std::endl;
-    config.fileName = wasmFile.c_str();
-    config.debugInfoOutputFilePath = debugTarget.c_str();
-    config.expectInfoOutputFilePath = expectTarget.c_str();
-    config.sourceMap = wasmFileMap.c_str();
-    config.targetName = wasmTarget.c_str();
+    config.fileName = wasmFile.string();
+    config.debugInfoOutputFilePath = debugTarget.string();
+    config.expectInfoOutputFilePath = expectTarget.string();
+    config.sourceMap = wasmFileMap.string();
+    config.targetName = wasmTarget.string();
     config.reportFunction = traceFunName;
     config.includes = include;
     config.excludes = "";
@@ -67,7 +67,7 @@ TEST(lit, coverageInstrumentation) {
     ASSERT_EQ(instrumentor.instrument(), wasmInstrumentation::InstrumentationResponse::NORMAL);
     std::stringstream cmd;
     cmd << "node " << executor << " " << wasmTarget << " >" << tmpDir << "/" << wast << ".run.log";
-    const std::filesystem::path fixtureFilePath = fixtureFolder / (wast + ".debug.json");
+    const std::filesystem::path fixtureFilePath = fixtureFolder / (wast.string() + ".debug.json");
     std::ifstream fixtureStream(fixtureFilePath);
     std::ifstream debugInfoStream(debugTarget);
     Json::Value fixtureJson;
@@ -103,11 +103,11 @@ TEST(lit, expectInstrumentation) {
   const std::filesystem::path wasmTarget = tmpDir / "expect.test.instrumented.wasm";
   const char *traceFunName = "assembly/env/traceExpression";
   const char *include = "[\"tests-as\",\"assembly/.*\"]";
-  config.fileName = wasmFile.c_str();
-  config.sourceMap = wasmFileMap.c_str();
-  config.debugInfoOutputFilePath = debugTarget.c_str();
-  config.expectInfoOutputFilePath = expectTarget.c_str();
-  config.targetName = wasmTarget.c_str();
+  config.fileName = wasmFile.string();
+  config.sourceMap = wasmFileMap.string();
+  config.debugInfoOutputFilePath = debugTarget.string();
+  config.expectInfoOutputFilePath = expectTarget.string();
+  config.targetName = wasmTarget.string();
   config.reportFunction = traceFunName;
   config.includes = include;
   config.excludes = "";

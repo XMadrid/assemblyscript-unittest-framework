@@ -23,11 +23,11 @@ TEST(fuzz, asc) {
       build_path / "assemblyscript.debug.wasm.expectinfo.json";
   const char *reportName = "assembly/env/traceExpression";
   wasmInstrumentation::InstrumentationConfig config;
-  config.fileName = wasmPath.c_str();
-  config.debugInfoOutputFilePath = targetDebugInfoPath.c_str();
-  config.sourceMap = mapPath.c_str();
-  config.targetName = targetPath.c_str();
-  config.expectInfoOutputFilePath = targetExpectInfoPath.c_str();
+  config.fileName = wasmPath.string();
+  config.debugInfoOutputFilePath = targetDebugInfoPath.string();
+  config.sourceMap = mapPath.string();
+  config.targetName = targetPath.string();
+  config.expectInfoOutputFilePath = targetExpectInfoPath.string();
   config.reportFunction = reportName;
   wasmInstrumentation::CoverageInstru instrumentor(&config);
   ASSERT_EQ(instrumentor.instrument(), wasmInstrumentation::InstrumentationResponse::NORMAL);
