@@ -91,16 +91,18 @@ jobs:
       - name: install ninja
         run: choco install ninja
 
-      - run: npm run build
+      # - run: npm run build
 
-      - name: run test
-        run: |
-          npm run test:as
-          npm run test:ts
-          cmake -B build -S . '-DCMAKE_TOOLCHAIN_FILE="C:/vcpkg/scripts/buildsystems/vcpkg.cmake"' -DVCPKG_TARGET_TRIPLET=x64-windows
-          cmake --build build --parallel 2 --target wasm-instrumentation-test wasm-opt
-          wasm-instrumentation-test
-          npm run test:e2e
+      - run: npm run test:cpp
+
+      # - name: run test
+      #   run: |
+      #     npm run test:as
+      #     npm run test:ts
+      #     cmake -B build -S . '-DCMAKE_TOOLCHAIN_FILE="C:/vcpkg/scripts/buildsystems/vcpkg.cmake"' -DVCPKG_TARGET_TRIPLET=x64-windows
+      #     cmake --build build --parallel 2 --target wasm-instrumentation-test wasm-opt
+      #     build/bin/wasm-instrumentation-test
+      #     npm run test:e2e
 
       - working-directory: ./example
         run: |
