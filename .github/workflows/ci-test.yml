@@ -93,7 +93,14 @@ jobs:
 
       - run: npm run build
 
-      - run: npm run test
+      - name: run test
+        run: |
+          npm run test:as
+          npm run test:ts
+          cmake -B build -S . '-DCMAKE_TOOLCHAIN_FILE="C:/vcpkg/scripts/buildsystems/vcpkg.cmake"' -DVCPKG_TARGET_TRIPLET=x64-windows
+          cmake --build build --parallel 2 --target wasm-instrumentation-test wasm-opt
+          wasm-instrumentation-test
+          npm run test:e2e
 
       - working-directory: ./example
         run: |
