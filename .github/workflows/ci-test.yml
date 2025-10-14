@@ -98,7 +98,7 @@ jobs:
 
       - name: run test
         run: |
-          cmake -B build -S .  -DCMAKE_PREFIX_PATH=C:/vcpkg/packages/gtest_x64-windows '-DCMAKE_TOOLCHAIN_FILE="C:/vcpkg/scripts/buildsystems/vcpkg.cmake"' -DVCPKG_TARGET_TRIPLET=x64-windows
+          cmake -B build -S .  -DCMAKE_PREFIX_PATH=C:/vcpkg/packages/gtest_x64-windows
           cmake --build build --parallel 2 --target wasm-instrumentation-test wasm-opt
           build/bin/wasm-instrumentation-test
 
