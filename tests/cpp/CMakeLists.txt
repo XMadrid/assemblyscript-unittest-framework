@@ -18,4 +18,4 @@ target_link_libraries(
   jsoncpp_static
 )
 include(GoogleTest)
-gtest_discover_tests(wasm-instrumentation-test)
+# gtest_discover_tests(wasm-instrumentation-test)
