@@ -83,12 +83,6 @@ jobs:
           restore-keys: |
             ccache-${{ runner.os }}-build-
 
-      # - name: Install Google Test
-      #   run: |
-      #     vcpkg install gtest:x64-windows
-      #     vcpkg list gtest:x64-windows
-      #     echo "GTest_ROOT=C:/vcpkg/installed/x64-windows" >> $GITHUB_ENV
-
       - name: install ninja
         run: choco install ninja
 
@@ -97,3 +91,10 @@ jobs:
       - name: run test for windows
         run: |
           npm run test:as
+
+      - working-directory: ./example
+        shell: bash
+        run: |
+          npm ci
+          npm run test
+          npm run test:cjs
