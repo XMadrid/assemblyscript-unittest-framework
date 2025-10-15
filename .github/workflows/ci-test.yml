@@ -83,9 +83,6 @@ jobs:
           restore-keys: |
             ccache-${{ runner.os }}-build-
 
-      - name: install ninja
-        run: choco install ninja
-
       - run: npm run build
 
       - name: run test for windows
