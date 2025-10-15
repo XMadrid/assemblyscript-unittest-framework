@@ -92,11 +92,12 @@ jobs:
       - name: install ninja
         run: choco install ninja
 
+      - run: npm run build
+
       - name: run test for windows
         run: |
           npm run test:as
           npm run test:e2e
-
 
       - working-directory: ./example
         run: |
