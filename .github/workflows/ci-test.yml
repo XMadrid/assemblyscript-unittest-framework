@@ -100,7 +100,6 @@ jobs:
 
       - working-directory: ./example
         run: |
-          set -e
           npm ci
           npm run test
           npm run test:cjs
