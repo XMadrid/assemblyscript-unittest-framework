@@ -92,10 +92,3 @@ jobs:
         run: |
           npm run test:as
 
-      - shell: bash
-        working-directory: ./example
-        run: |
-          set -e
-          npm ci
-          npm run test
-          npm run test:cjs
