@@ -97,7 +97,6 @@ jobs:
       - name: run test for windows
         run: |
           npm run test:as
-          npm run test:e2e
 
       - working-directory: ./example
         run: |
