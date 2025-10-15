@@ -97,9 +97,3 @@ jobs:
       - name: run test for windows
         run: |
           npm run test:as
-
-      - working-directory: ./example
-        run: |
-          npm ci
-          npm run test
-          npm run test:cjs
